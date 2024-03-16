@@ -125,7 +125,8 @@ const handleCommand = (command) => {
                 <!-- command: 條目被點擊後會觸發,在事件函數上可以聲明一個參數,接收條目對應的指令 -->
                 <el-dropdown placement="bottom-end" @command="handleCommand">
                     <span class="el-dropdown__box">
-                        <el-avatar :src="userInfoStore.info.userPic ? userInfoStore.info.userPic : avatar" />
+                        <el-avatar
+                            :src="userInfoStore.info.userPic ? userInfoStore.info.userPic : 'https://storage.googleapis.com/springboot_project_bucket/2852428c-3b54-4562-bbc3-ce163dccdf5b.jpg'" />
                         <el-icon>
                             <CaretBottom />
                         </el-icon>
