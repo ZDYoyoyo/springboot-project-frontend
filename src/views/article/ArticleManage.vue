@@ -41,8 +41,18 @@ const state = ref('')
 const articles = ref([
     {
         "id": 5,
-        "title": "陝西旅遊攻略",
-        "content": "兵馬俑,華清池,法門寺,華山...愛去哪去哪...",
+        "title": "台灣美食攻略",
+        "content": "臭豆腐,蚵仔煎,珍珠奶茶......",
+        "coverImg": "https://big-event-gwd.oss-cn-beijing.aliyuncs.com/9bf1cf5b-1420-4c1b-91ad-e0f4631cbed4.png",
+        "state": "草稿",
+        "categoryId": 1,
+        "createTime": "2023-09-03 11:55:30",
+        "updateTime": "2023-09-03 11:55:30"
+    },
+    {
+        "id": 5,
+        "title": "台灣旅遊攻略",
+        "content": "台北101,九份老街,清境農場......",
         "coverImg": "https://big-event-gwd.oss-cn-beijing.aliyuncs.com/9bf1cf5b-1420-4c1b-91ad-e0f4631cbed4.png",
         "state": "草稿",
         "categoryId": 2,
@@ -51,21 +61,11 @@ const articles = ref([
     },
     {
         "id": 5,
-        "title": "陝西旅遊攻略",
-        "content": "兵馬俑,華清池,法門寺,華山...愛去哪去哪...",
+        "title": "台灣軍事介紹",
+        "content": "F-1,阿帕契,雄三飛彈....",
         "coverImg": "https://big-event-gwd.oss-cn-beijing.aliyuncs.com/9bf1cf5b-1420-4c1b-91ad-e0f4631cbed4.png",
         "state": "草稿",
-        "categoryId": 2,
-        "createTime": "2023-09-03 11:55:30",
-        "updateTime": "2023-09-03 11:55:30"
-    },
-    {
-        "id": 5,
-        "title": "陝西旅遊攻略",
-        "content": "兵馬俑,華清池,法門寺,華山...愛去哪去哪...",
-        "coverImg": "https://big-event-gwd.oss-cn-beijing.aliyuncs.com/9bf1cf5b-1420-4c1b-91ad-e0f4631cbed4.png",
-        "state": "草稿",
-        "categoryId": 2,
+        "categoryId": 3,
         "createTime": "2023-09-03 11:55:30",
         "updateTime": "2023-09-03 11:55:30"
     },
