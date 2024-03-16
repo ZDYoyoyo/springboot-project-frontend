@@ -32,16 +32,23 @@ const rules = {
         { min: 5, max: 16, message: '長度為5~16位非空字符', trigger: 'blur' }
     ],
     rePassword: [
-        { required: true, message: '請再次確認密碼', trigger: 'blur' },
         { validator: checkRePassword, trigger: 'blur' }
     ]
 }
 
+const form = ref(null);
 //調用後臺接口,完成註冊
 import { userRegisterService, userLoginService } from '@/api/user.js'
 const register = async () => {
+    form.value.validate(async (isValid) => {
+        if (isValid) {
+            // 表单所有元素验证通过，可以提交了
+            let result = await userRegisterService(registerData.value);
+            ElMessage.success(result.msg ? result.msg : '注册成功');
+        }
+    })
     //registerData是一個響應式對象,如果要獲取值,需要.value
-    let result = await userRegisterService(registerData.value);
+    // let result = await userRegisterService(registerData.value);
     /* if (result.code === 0) {
         //成功了
         alert(result.msg ? result.msg : '註冊成功');
@@ -50,7 +57,7 @@ const register = async () => {
         alert('註冊失敗')
     } */
     // alert(result.msg ? result.msg : '註冊成功');
-    ElMessage.success(result.msg ? result.msg : '註冊成功')
+    // ElMessage.success(result.msg ? result.msg : '註冊成功')
 }
 
 
