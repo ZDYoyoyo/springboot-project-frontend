@@ -1,9 +1,9 @@
-//导入request.js请求工具
+//導入request.js請求工具
 import request from '@/utils/request.js'
 
-//提供调用注册接口的函数
+//提供調用註冊接口的函數
 export const userRegisterService = (registerData) => {
-    //借助于UrlSearchParams完成传递
+    //借助於UrlSearchParams完成傳遞
     const params = new URLSearchParams()
     for (let key in registerData) {
         params.append(key, registerData[key]);
@@ -11,7 +11,7 @@ export const userRegisterService = (registerData) => {
     return request.post('/user/register', params);
 }
 
-//提供调用登录接口的函数
+//提供調用登錄接口的函數
 export const userLoginService = (loginData) => {
     const params = new URLSearchParams();
     for (let key in loginData) {
@@ -21,17 +21,17 @@ export const userLoginService = (loginData) => {
 }
 
 
-//获取用户详细信息
+//獲取用戶詳細信息
 export const userInfoService = () => {
     return request.get('/user/userInfo')
 }
 
-//修改个人信息
+//修改個人信息
 export const userInfoUpdateService = (userInfoData) => {
     return request.put('/user/update', userInfoData)
 }
 
-//修改头像
+//修改頭像
 export const userAvatarUpdateService = (avatarUrl) => {
     const params = new URLSearchParams();
     params.append('avatarUrl', avatarUrl)

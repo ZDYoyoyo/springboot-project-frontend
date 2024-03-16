@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-//导入组件
+//導入組件
 import LoginVue from '@/views/Login.vue'
 import LayoutVue from '@/views/Layout.vue'
 
@@ -10,7 +10,7 @@ import UserAvatarVue from '@/views/user/UserAvatar.vue'
 import UserInfoVue from '@/views/user/UserInfo.vue'
 import UserResetPasswordVue from '@/views/user/UserResetPassword.vue'
 
-//定义路由关系
+//定義路由關係
 const routes = [
     { path: '/login', component: LoginVue },
     {
@@ -24,11 +24,11 @@ const routes = [
     }
 ]
 
-//创建路由器
+//創建路由器
 const router = createRouter({
     history: createWebHistory(),
     routes: routes
 })
 
-//导出路由
+//導出路由
 export default router

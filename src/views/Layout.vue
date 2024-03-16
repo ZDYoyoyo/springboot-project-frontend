@@ -16,51 +16,51 @@ import useUserInfoStore from '@/stores/userInfo.js'
 import { useTokenStore } from '@/stores/token.js'
 const tokenStore = useTokenStore();
 const userInfoStore = useUserInfoStore();
-//调用函数,获取用户详细信息
+//調用函數,獲取使用者詳細信息
 const getUserInfo = async () => {
-    //调用接口
+    //調用接口
     let result = await userInfoService();
-    //数据存储到pinia中
+    //資料存儲到pinia中
     userInfoStore.setInfo(result.data);
 }
 
 getUserInfo();
 
-//条目被点击后,调用的函数
+//條目被點擊後,調用的函數
 import { useRouter } from 'vue-router'
 const router = useRouter();
 import { ElMessage, ElMessageBox } from 'element-plus'
 const handleCommand = (command) => {
-    //判断指令
+    //判斷指令
     if (command === 'logout') {
-        //退出登录
+        //退出登錄
         ElMessageBox.confirm(
-            '您确认要退出吗?',
-            '温馨提示',
+            '您確認要退出嗎?',
+            '溫馨提示',
             {
-                confirmButtonText: '确认',
+                confirmButtonText: '確認',
                 cancelButtonText: '取消',
                 type: 'warning',
             }
         )
             .then(async () => {
-                //退出登录
-                //1.清空pinia中存储的token以及个人信息
+                //退出登錄
+                //1.清空pinia中存儲的token以及個人資訊
                 tokenStore.removeToken()
                 userInfoStore.removeInfo()
 
-                //2.跳转到登录页面
+                //2.跳轉到登錄頁面
                 router.push('/login')
                 ElMessage({
                     type: 'success',
-                    message: '退出登录成功',
+                    message: '退出登錄成功',
                 })
 
             })
             .catch(() => {
                 ElMessage({
                     type: 'info',
-                    message: '用户取消了退出登录',
+                    message: '用戶取消了退出登錄',
                 })
             })
     } else {
@@ -72,7 +72,7 @@ const handleCommand = (command) => {
 
 <template>
     <el-container class="layout-container">
-        <!-- 左侧菜单 -->
+        <!-- 左側菜單 -->
         <el-aside width="200px">
             <div class="el-aside__logo"></div>
             <el-menu active-text-color="#ffd04b" background-color="#232323" text-color="#fff" router>
@@ -80,7 +80,7 @@ const handleCommand = (command) => {
                     <el-icon>
                         <Management />
                     </el-icon>
-                    <span>文章分类</span>
+                    <span>文章分類</span>
                 </el-menu-item>
                 <el-menu-item index="/article/manage">
                     <el-icon>
@@ -93,36 +93,36 @@ const handleCommand = (command) => {
                         <el-icon>
                             <UserFilled />
                         </el-icon>
-                        <span>个人中心</span>
+                        <span>個人中心</span>
                     </template>
                     <el-menu-item index="/user/info">
                         <el-icon>
                             <User />
                         </el-icon>
-                        <span>基本资料</span>
+                        <span>基本資料</span>
                     </el-menu-item>
                     <el-menu-item index="/user/avatar">
                         <el-icon>
                             <Crop />
                         </el-icon>
-                        <span>更换头像</span>
+                        <span>更換頭像</span>
                     </el-menu-item>
                     <el-menu-item index="/user/resetPassword">
                         <el-icon>
                             <EditPen />
                         </el-icon>
-                        <span>重置密码</span>
+                        <span>重設密碼</span>
                     </el-menu-item>
                 </el-sub-menu>
             </el-menu>
         </el-aside>
-        <!-- 右侧主区域 -->
+        <!-- 右側主區域 -->
         <el-container>
-            <!-- 头部区域 -->
+            <!-- 頭部區域 -->
             <el-header>
                 <div>作者：<strong>{{ userInfoStore.info.nickname }}</strong></div>
-                <!-- 下拉菜单 -->
-                <!-- command: 条目被点击后会触发,在事件函数上可以声明一个参数,接收条目对应的指令 -->
+                <!-- 下拉菜單 -->
+                <!-- command: 條目被點擊後會觸發,在事件函數上可以聲明一個參數,接收條目對應的指令 -->
                 <el-dropdown placement="bottom-end" @command="handleCommand">
                     <span class="el-dropdown__box">
                         <el-avatar :src="userInfoStore.info.userPic ? userInfoStore.info.userPic : avatar" />
@@ -133,22 +133,22 @@ const handleCommand = (command) => {
 
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <el-dropdown-item command="info" :icon="User">基本资料</el-dropdown-item>
-                            <el-dropdown-item command="avatar" :icon="Crop">更换头像</el-dropdown-item>
-                            <el-dropdown-item command="resetPassword" :icon="EditPen">重置密码</el-dropdown-item>
-                            <el-dropdown-item command="logout" :icon="SwitchButton">退出登录</el-dropdown-item>
+                            <el-dropdown-item command="info" :icon="User">基本資料</el-dropdown-item>
+                            <el-dropdown-item command="avatar" :icon="Crop">更換頭像</el-dropdown-item>
+                            <el-dropdown-item command="resetPassword" :icon="EditPen">重設密碼</el-dropdown-item>
+                            <el-dropdown-item command="logout" :icon="SwitchButton">退出登錄</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
             </el-header>
-            <!-- 中间区域 -->
+            <!-- 中間區域 -->
             <el-main>
                 <!-- <div style="width: 1290px; height: 570px;border: 1px solid red;">
-                    内容展示区
-                </div> -->
+            內容展示區
+        </div> -->
                 <router-view></router-view>
             </el-main>
-            <!-- 底部区域 -->
+            <!-- 底部區域 -->
             <el-footer>
                 縫合怪 ©2024 Created by 鍾定佑
             </el-footer>

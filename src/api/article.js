@@ -1,29 +1,29 @@
 import request from '@/utils/request.js'
 import { useTokenStore } from '@/stores/token.js'
-//文章分类列表查询
+//文章分類列表查詢
 export const articleCategoryListService = () => {
     // const tokenStore = useTokenStore();
-    //在pinia中定义的响应式数据,都不需要.value
+    //在pinia中定義的響應式數據,都不需要.value
     // return request.get('/category', { headers: { 'Authorization': tokenStore.token } })
     return request.get('/category')
 }
 
-//文章分类添加
+//文章分類添加
 export const articleCategoryAddService = (categoryData) => {
     return request.post('/category', categoryData)
 }
 
-//文章分类修改
+//文章分類修改
 export const articleCategoryUpdateService = (categoryData) => {
     return request.put('/category', categoryData)
 }
 
-//文章分类删除
+//文章分類刪除
 export const articleCategoryDeleteService = (id) => {
     return request.delete('/category?id=' + id)
 }
 
-//文章列表查询
+//文章列表查詢
 export const articleListService = (params) => {
     return request.get('/article', { params: params })
 }
@@ -38,7 +38,7 @@ export const articleUpdateService = (articleData) => {
     return request.put('/article', articleData)
 }
 
-//文章分类删除
+//文章分類刪除
 export const articleDeleteService = (id) => {
     return request.delete('/article?id=' + id)
 }

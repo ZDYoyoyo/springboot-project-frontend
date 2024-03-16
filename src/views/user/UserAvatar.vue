@@ -9,10 +9,10 @@ const tokenStore = useTokenStore();
 import useUserInfoStore from '@/stores/userInfo.js'
 const userInfoStore = useUserInfoStore();
 
-//用户头像地址
+//使用者頭像地址
 const imgUrl = ref(userInfoStore.info.userPic)
 
-//图片上传成功的回调函数
+//圖片上傳成功的回調函數
 const uploadSuccess = (result) => {
     imgUrl.value = result.data;
 }
@@ -21,14 +21,14 @@ const uploadSuccess = (result) => {
 
 import { userAvatarUpdateService } from '@/api/user.js'
 import { ElMessage } from 'element-plus'
-//头像修改
+//頭像修改
 const updateAvatar = async () => {
-    //调用接口
+    //調用接口
     let result = await userAvatarUpdateService(imgUrl.value);
 
     ElMessage.success(result.msg ? result.msg : '修改成功')
 
-    //修改pinia中的数据
+    //修改pinia中的數據
     userInfoStore.info.userPic = imgUrl.value
 }
 </script>
@@ -37,7 +37,7 @@ const updateAvatar = async () => {
     <el-card class="page-container">
         <template #header>
             <div class="header">
-                <span>更换头像</span>
+                <span>更換頭像</span>
             </div>
         </template>
         <el-row>
@@ -51,10 +51,10 @@ const updateAvatar = async () => {
                 <br />
                 <el-button type="primary" :icon="Plus" size="large"
                     @click="uploadRef.$el.querySelector('input').click()">
-                    选择图片
+                    選擇圖片
                 </el-button>
                 <el-button type="success" :icon="Upload" size="large" @click="updateAvatar">
-                    上传头像
+                    上傳頭像
                 </el-button>
             </el-col>
         </el-row>

@@ -2,7 +2,7 @@
 import { User, Lock } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
-//控制注册与登录表单的显示， 默认显示注册
+//控制註冊與登錄表單的顯示，默認顯示註冊
 const isRegister = ref(false)
 const registerData = ref({
     username: '',
@@ -10,73 +10,74 @@ const registerData = ref({
     rePassword: ''
 })
 
-//校验密码的函数
+// 校驗密碼的函數
 const checkRePassword = (rule, value, callback) => {
     if (value === '') {
-        callback(new Error('请再次确认密码'))
+        callback(new Error('請再次確認密碼'))
     } else if (value !== registerData.value.password) {
-        callback(new Error('请确保两次输入的密码一样'))
+        callback(new Error('請確保兩次輸入的密碼一致'))
     } else {
         callback()
     }
 }
 
-//定义表单校验规则
+// 定義表單校驗規則
 const rules = {
     username: [
-        { required: true, message: '请输入用户名', trigger: 'blur' },
-        { min: 5, max: 16, message: '长度为5~16位非空字符', trigger: 'blur' }
+        { required: true, message: '請輸入用戶名', trigger: 'blur' },
+        { min: 5, max: 16, message: '長度為5~16位非空字符', trigger: 'blur' }
     ],
     password: [
-        { required: true, message: '请输入密码', trigger: 'blur' },
-        { min: 5, max: 16, message: '长度为5~16位非空字符', trigger: 'blur' }
+        { required: true, message: '請輸入密碼', trigger: 'blur' },
+        { min: 5, max: 16, message: '長度為5~16位非空字符', trigger: 'blur' }
     ],
     rePassword: [
+        { required: true, message: '請再次確認密碼', trigger: 'blur' },
         { validator: checkRePassword, trigger: 'blur' }
     ]
 }
 
-//调用后台接口,完成注册
+//調用後臺接口,完成註冊
 import { userRegisterService, userLoginService } from '@/api/user.js'
 const register = async () => {
-    //registerData是一个响应式对象,如果要获取值,需要.value
+    //registerData是一個響應式對象,如果要獲取值,需要.value
     let result = await userRegisterService(registerData.value);
     /* if (result.code === 0) {
         //成功了
-        alert(result.msg ? result.msg : '注册成功');
+        alert(result.msg ? result.msg : '註冊成功');
     }else{
-        //失败了
-        alert('注册失败')
+        //失敗了
+        alert('註冊失敗')
     } */
-    // alert(result.msg ? result.msg : '注册成功');
-    ElMessage.success(result.msg ? result.msg : '注册成功')
+    // alert(result.msg ? result.msg : '註冊成功');
+    ElMessage.success(result.msg ? result.msg : '註冊成功')
 }
 
 
-//绑定数据,复用注册表单的数据模型
-//表单数据校验
-//登录函数
+//綁定資料,複用註冊表單的資料模型
+//表單資料校驗
+//登錄函數
 import { useTokenStore } from '@/stores/token.js'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 const tokenStore = useTokenStore();
 const login = async () => {
-    //调用接口,完成登录
+    //調用接口,完成登錄
     let result = await userLoginService(registerData.value);
     /* if(result.code===0){
-     alert(result.msg? result.msg : '登录成功')
+     alert(result.msg? result.msg : '登錄成功')
     }else{
-     alert('登录失败')
+     alert('登錄失敗')
     } */
-    //    alert(result.msg? result.msg : '登录成功')
-    ElMessage.success(result.msg ? result.msg : '登录成功')
-    //把得到的token存储到pinia中
+    //    alert(result.msg? result.msg : '登錄成功')
+    ElMessage.success(result.msg ? result.msg : '登錄成功')
+    //把得到的token存儲到pinia中
     tokenStore.setToken(result.data)
-    //跳转到首页 路由完成跳转
+    //跳轉到首頁 路由完成跳轉
     router.push('/')
 }
 
-//定义函数,清空数据模型的数据
+//定義函數,清空資料模型的資料
 const clearRegisterData = () => {
     registerData.value = {
         username: '',
@@ -91,26 +92,26 @@ const clearRegisterData = () => {
     <el-row class="login-page">
         <el-col :span="12" class="bg"></el-col>
         <el-col :span="6" :offset="3" class="form">
-            <!-- 注册表单 -->
+            <!-- 註冊表單 -->
             <el-form ref="form" size="large" autocomplete="off" v-if="isRegister" :model="registerData" :rules="rules">
                 <el-form-item>
-                    <h1>注册</h1>
+                    <h1>註冊</h1>
                 </el-form-item>
                 <el-form-item prop="username">
-                    <el-input :prefix-icon="User" placeholder="请输入用户名" v-model="registerData.username"></el-input>
+                    <el-input :prefix-icon="User" placeholder="請輸入用戶名" v-model="registerData.username"></el-input>
                 </el-form-item>
                 <el-form-item prop="password">
-                    <el-input :prefix-icon="Lock" type="password" placeholder="请输入密码"
+                    <el-input :prefix-icon="Lock" type="password" placeholder="請輸入密碼"
                         v-model="registerData.password"></el-input>
                 </el-form-item>
                 <el-form-item prop="rePassword">
-                    <el-input :prefix-icon="Lock" type="password" placeholder="请再次輸入密码"
+                    <el-input :prefix-icon="Lock" type="password" placeholder="請再次輸入密碼"
                         v-model="registerData.rePassword"></el-input>
                 </el-form-item>
-                <!-- 注册按钮 -->
+                <!-- 註冊按鈕 -->
                 <el-form-item>
                     <el-button class="button" type="primary" auto-insert-space @click="register">
-                        注册
+                        註冊
                     </el-button>
                 </el-form-item>
                 <el-form-item class="flex">
@@ -119,31 +120,31 @@ const clearRegisterData = () => {
                     </el-link>
                 </el-form-item>
             </el-form>
-            <!-- 登录表单 -->
+            <!-- 登錄表單 -->
             <el-form ref="form" size="large" autocomplete="off" v-else :model="registerData" :rules="rules">
                 <el-form-item>
-                    <h1>登录</h1>
+                    <h1>登錄</h1>
                 </el-form-item>
                 <el-form-item prop="username">
-                    <el-input :prefix-icon="User" placeholder="请输入用户名" v-model="registerData.username"></el-input>
+                    <el-input :prefix-icon="User" placeholder="請輸入用戶名" v-model="registerData.username"></el-input>
                 </el-form-item>
                 <el-form-item prop="password">
-                    <el-input name="password" :prefix-icon="Lock" type="password" placeholder="请输入密码"
+                    <el-input name="password" :prefix-icon="Lock" type="password" placeholder="請輸入密碼"
                         v-model="registerData.password"></el-input>
                 </el-form-item>
                 <el-form-item class="flex">
                     <div class="flex">
-                        <el-checkbox>记住我</el-checkbox>
-                        <el-link type="primary" :underline="false">忘记密码？</el-link>
+                        <el-checkbox>記住我</el-checkbox>
+                        <el-link type="primary" :underline="false">忘記密碼？</el-link>
                     </div>
                 </el-form-item>
-                <!-- 登录按钮 -->
+                <!-- 登錄按鈕 -->
                 <el-form-item>
-                    <el-button class="button" type="primary" auto-insert-space @click="login">登录</el-button>
+                    <el-button class="button" type="primary" auto-insert-space @click="login">登錄</el-button>
                 </el-form-item>
                 <el-form-item class="flex">
                     <el-link type="info" :underline="false" @click="isRegister = true; clearRegisterData()">
-                        注册 →
+                        註冊 →
                     </el-link>
                 </el-form-item>
             </el-form>

@@ -1,4 +1,4 @@
-//定义store
+//定義store
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 /* 
@@ -8,17 +8,17 @@ import { ref } from 'vue'
     返回值: 函数
 */
 export const useTokenStore = defineStore('token', () => {
-    //定义状态的内容
+    //定義狀態的內容
 
-    //1.响应式变量
+    //1.響應式變量
     const token = ref('')
 
-    //2.定义一个函数,修改token的值
+    //2.定義一個函數,修改token的值
     const setToken = (newToken) => {
         token.value = newToken
     }
 
-    //3.函数,移除token的值
+    //3.函數,移除token的值
     const removeToken = () => {
         token.value = ''
     }
@@ -27,5 +27,5 @@ export const useTokenStore = defineStore('token', () => {
         token, setToken, removeToken
     }
 }, {
-    persist: true//持久化存储
+    persist: true//持久化存儲
 });
