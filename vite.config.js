@@ -18,7 +18,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': { // 获取路徑中包含了/api的請求
-        target: 'http://localhost:8080', // 後臺服務所在的源
+        // target: 'http://localhost:8080', // 後臺服務所在的源
+        target: 'https://bigevent-fhmvnrnloq-de.a.run.app', // 後臺服務所在的源
         changeOrigin: true, // 修改源
         rewrite: (path) => path.replace(/^\/api/, '') // /api替換為''
       }
